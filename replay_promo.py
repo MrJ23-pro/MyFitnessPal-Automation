@@ -31,7 +31,6 @@ UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like 
 
 
 def load_env_file(script_dir):
-    """Load configuration from .env file."""
     env_file = os.path.join(script_dir, ".env")
     env_vars = {}
     if os.path.exists(env_file):
@@ -45,7 +44,6 @@ def load_env_file(script_dir):
 
 
 def captured_submission():
-    """Load default form values from captured requests."""
     path = os.path.join(SCRIPT_DIR, "full", "requests.jsonl")
     if not os.path.exists(path):
         return {}
@@ -63,7 +61,6 @@ def captured_submission():
     return {}
 
 def curl(method, url, proxy, headers=None, data=None, timeout=25):
-    """Execute curl request and return (status_code, response_body, bytes_transferred)."""
     wfmt = "\n__CODE__%{http_code} __BYTES__%{size_download} %{size_upload} %{size_header} %{size_request}"
     cmd = ["curl", "-s", "-g", "-w", wfmt, "-X", method, "--max-time", str(timeout), "-A", UA]
     if proxy:
@@ -88,7 +85,6 @@ def curl(method, url, proxy, headers=None, data=None, timeout=25):
 
 
 def ask(prompt, default):
-    """Prompt for user input with optional default value."""
     suffix = f" [{default}]" if default else ""
     try:
         val = input(f"{prompt}{suffix}: ").strip()
@@ -98,7 +94,6 @@ def ask(prompt, default):
 
 
 def solve_captcha_2captcha(client_key, website_url, website_key, proxy=None, timeout=60):
-    """Solve reCAPTCHA v3 using 2captcha API. Returns token or None on failure."""
     task_payload = {
         "clientKey": client_key,
         "task": {
