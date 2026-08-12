@@ -1,0 +1,5 @@
+# No external Python dependencies required
+# Uses standard library only: json, os, subprocess, sys, time, argparse
+
+# Optional: for enhanced functionality
+# requests>=2.25.0  # For easier HTTP requests (curl is used as fallback)
